@@ -57,7 +57,7 @@ function calcCTR(){
 
 	<div class="col-right">
 	<h2> Titolo Alternativo </h2>
-		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off">
+		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
 		<div id="tips">';
 	foreach ($response->tips as $tip => $text) {
 		echo '<div class="cornice">
