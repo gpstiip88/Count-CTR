@@ -1,10 +1,13 @@
 (function($){
+	var purchase_code = '';
+
 	function getTitlePoints(title, titleClass, setTips = false){
 		$.ajax({
 			type: "POST",
-			url: 'http://dev.stiip.it/api-ctr/calc-ctr.php',
+			url: ritle.api_url,
 			data: {
-				title: title
+				title: title,
+				purchaseCode: ritle.purchase_code
 			},
 			success: function(response){
 				var points = response.points;

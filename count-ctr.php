@@ -96,14 +96,22 @@ function calcCTR(){
 	}
 
 	wp_enqueue_style( 'ctrCountPluginStylesheet', plugins_url( 'style.css', __FILE__ ) );
-	wp_enqueue_script('ctrCountPluginJS', plugins_url( 'main.js', __FILE__ ), array('jquery'), '1.0', true);
+	wp_register_script('ctrCountPluginJS', plugins_url( 'main.js', __FILE__ ), array('jquery'), '1.0', true);
+
+	$plugin_data = array(
+		'purchase_code' => $purchase_code,
+		'api_url' => 'http://localhost:8001/calc-ctr.php'
+	);
+	wp_localize_script( 'ctrCountPluginJS', 'ritle', $plugin_data );
+
+	// Enqueued script with localized data.
+	wp_enqueue_script( 'ctrCountPluginJS' );
 
 	$title = html_entity_decode( get_the_title(), ENT_QUOTES, 'UTF-8' );
 	if( $title != ''){
 
-
-		$response = json_decode( wp_remote_retrieve_body(wp_remote_post('http://dev.stiip.it/api-ctr/calc-ctr.php', array(
-				    'body'      => ['title' => $title],
+		$response = json_decode( wp_remote_retrieve_body(wp_remote_post($plugin_data['api_url'], array(
+				    'body'      => ['title' => $title, 'purchaseCode' => $purchase_code],
 				))) );
 		$points = $response->points;
 	} else {
