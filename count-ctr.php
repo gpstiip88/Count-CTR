@@ -7,8 +7,7 @@ Author: Gabriele Pieretti
 Author URI: http://www.stiip.it
 */
 
-/** Add action Ritle pluin page */
-add_action( 'admin_menu', 'my_plugin_menu' );
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 /** CSS Style Ritle pluin page  */
 function admin_register_head() {
@@ -18,35 +17,84 @@ function admin_register_head() {
 }
 add_action('admin_head', 'admin_register_head');
 
-/** Function Ritle pluin page  */
-function my_plugin_menu() {
-	add_menu_page( 'My Plugin Options', 'Ritle', 'manage_options', 'my-unique-identifier', 'my_plugin_options', 'dashicons-palmtree');
+add_action( 'admin_menu', 'ritle_add_admin_menu' );
+add_action( 'admin_init', 'ritle_settings_init' );
+
+
+function ritle_add_admin_menu(  ) { 
+
+	add_menu_page( 'Ritle', 'Ritle', 'manage_options', 'ritle', 'ritle_options_page' );
+
 }
 
-/** HTML Ritle pluin page only for admin users */
-function my_plugin_options() {
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
-	echo '<div class="wrap">';
-	echo '<h1>Ritle - #1 Ottimizza il Tuo Title</h1>';
-	echo '<p>Inserisci il purchase code che ti è stato fornito in fase di acquisto</p>';
-	echo '<table class="form-table">';
-	echo '<tbody>';
-	echo '<tr>';
-	echo '<th scope="row">';
-	echo '<label for="blogname">Codice API</label>';
-	echo '</th>';
-	echo '<td><input name="blogname" type="text" id="blogname" value="Inserisci il codice di API" class="regular-text"></td>';
-	echo '</tr>';
-	echo '</tbody>';
-	echo '</table>';
-	echo '</div>';
+
+function ritle_settings_init(  ) { 
+
+	register_setting( 'pluginPage', 'ritle_settings' );
+
+	add_settings_section(
+		'ritle_pluginPage_section', 
+		__( 'Inserisci il purchase code che ti &egrave; stato fornito in fase di acquisto', 'ritle' ), 
+		'ritle_settings_section_callback', 
+		'pluginPage'
+	);
+
+	add_settings_field( 
+		'purchase_code', 
+		__( 'Purchase Code', 'ritle' ), 
+		'purchase_code_render', 
+		'pluginPage', 
+		'ritle_pluginPage_section' 
+	);
+
+
 }
 
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
+function purchase_code_render(  ) { 
+
+	$options = get_option( 'ritle_settings' );
+	?>
+	<input type='text' name='ritle_settings[purchase_code]' value='<?php echo $options['purchase_code']; ?>'>
+	<?php
+
+}
+
+
+function ritle_settings_section_callback(  ) { 
+
+	//echo __( 'This section description', 'ritle' );
+
+}
+
+
+function ritle_options_page(  ) { 
+
+	?>
+	<form action='options.php' method='post'>
+
+		<h2>Ritle</h2>
+
+		<?php
+		settings_fields( 'pluginPage' );
+		do_settings_sections( 'pluginPage' );
+		submit_button();
+		?>
+
+	</form>
+	<?php
+
+}
 
 function calcCTR(){
+	$options = get_option( 'ritle_settings' );
+	$purchase_code = $options['purchase_code'];
+
+	if( ! $purchase_code ){
+		echo 'Per favore Inserisci il tuo purchase code';
+		return;
+	}
+
 	wp_enqueue_style( 'ctrCountPluginStylesheet', plugins_url( 'style.css', __FILE__ ) );
 	wp_enqueue_script('ctrCountPluginJS', plugins_url( 'main.js', __FILE__ ), array('jquery'), '1.0', true);
 
@@ -63,45 +111,47 @@ function calcCTR(){
 	}
 
 	echo '
+	<div class="row">
+		<h2> Titolo Alternativo </h2>
+		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
+	</div>
 <div class="text row">
 
 	<div class="col-left-1" id="original-title">
-		<h2>CTR Titolo Originale</h2>
-			<div class="c100 p'.$points.'">
-				<span class="points">'.$points.'%</span>
-					<div class="slice">
-				    	<div class="bar">
-				    	</div>
-					    <div class="fill">
-					    </div>
-					</div>
-			</div>
+		<h2>CTR Titolo</h2>
+		<div class="c100 p'.$points.'">
+			<span class="points">'.$points.'%</span>
+				<div class="slice">
+			    	<div class="bar">
+			    	</div>
+				    <div class="fill">
+				    </div>
+				</div>
+		</div>
+
+		<div class="tips">';
+		foreach ($response->tips as $tip => $text) {
+			echo '<div class="cornice">
+				<p><span class="text-font">Suggerimento: </span>'.$text.'</p>
+			</div>';
+		}
+
+		echo '
+		</div>
 	</div>
 
 	<div class="col-left-2" id="alternative-title">
 		<h2>CTR Titolo Alternativo</h2>
-			<div class="c100 p0">
-				<span class="points hover-dif">0%</span>
-					<div class="slice">
-				    	<div style="border: 0.08em solid #aa0909;" class="bar">
-				    	</div>
-					    <!--<div style="border: 0.08em solid #aa0909;"  class="fill">
-					    </div>-->
-					</div>
-			</div>
-	</div>
-
-	<div class="col-right">
-	<h2> Titolo Alternativo </h2>
-		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
-		<div id="tips">';
-	foreach ($response->tips as $tip => $text) {
-		echo '<div class="cornice">
-			<p><span id="'.$tip.'" class="text-font">Suggerimento: </span>'.$text.'</p>
-		</div>';
-	}
-
-	echo '
+		<div class="c100 p0">
+			<span class="points hover-dif">0%</span>
+				<div class="slice">
+			    	<div style="border: 0.08em solid #aa0909;" class="bar">
+			    	</div>
+				    <!--<div style="border: 0.08em solid #aa0909;"  class="fill">
+				    </div>-->
+				</div>
+		</div>
+		<div class="tips">
 		</div>
 	</div>
 </div>';
