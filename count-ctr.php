@@ -53,7 +53,7 @@ function ritle_settings_init(  ) {
 function sample_admin_notice__update_nag_notice() { ?>
 	<div class="update-nag notice is-dismissible">
 		<h4>Per iniziare ad usare Tuno Plugin inserisci il purchase code nella pagina del plugin</h4>
-		<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu "Tuno Plugin" ed inserisci il codice.</p>
+		<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu &quot;Tuno Plugin&quot; ed inserisci il codice.</p>
 	</div>
 <?php
 }
@@ -132,6 +132,7 @@ function calcCTR(){
 	<div class="row">
 		<h2> Titolo Alternativo </h2>
 		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
+		<input type="submit" name="submit" id="submit" class="button button-primary" value="Usa titolo alternativo">
 	</div>
 <div class="text row">
 
