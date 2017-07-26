@@ -100,7 +100,7 @@ function calcCTR(){
 
 	$plugin_data = array(
 		'purchase_code' => $purchase_code,
-		'api_url' => 'http://localhost:8001/calc-ctr.php'
+		'api_url' => 'http://dev.stiip.it/api-ctr/calc-ctr.php'
 	);
 	wp_localize_script( 'ctrCountPluginJS', 'ritle', $plugin_data );
 
