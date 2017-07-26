@@ -21,37 +21,45 @@ add_action( 'admin_menu', 'ritle_add_admin_menu' );
 add_action( 'admin_init', 'ritle_settings_init' );
 
 
-function ritle_add_admin_menu(  ) { 
+function ritle_add_admin_menu(  ) {
 
 	add_menu_page( 'Ritle', 'Ritle', 'manage_options', 'ritle', 'ritle_options_page' );
 
 }
 
 
-function ritle_settings_init(  ) { 
+function ritle_settings_init(  ) {
 
 	register_setting( 'pluginPage', 'ritle_settings' );
 
 	add_settings_section(
-		'ritle_pluginPage_section', 
-		__( 'Inserisci il purchase code che ti &egrave; stato fornito in fase di acquisto', 'ritle' ), 
-		'ritle_settings_section_callback', 
+		'ritle_pluginPage_section',
+		__( 'Inserisci il purchase code che ti &egrave; stato fornito in fase di acquisto', 'ritle' ),
+		'ritle_settings_section_callback',
 		'pluginPage'
 	);
 
-	add_settings_field( 
-		'purchase_code', 
-		__( 'Purchase Code', 'ritle' ), 
-		'purchase_code_render', 
-		'pluginPage', 
-		'ritle_pluginPage_section' 
+	add_settings_field(
+		'purchase_code',
+		__( 'Purchase Code', 'ritle' ),
+		'purchase_code_render',
+		'pluginPage',
+		'ritle_pluginPage_section'
 	);
 
 
 }
 
+function sample_admin_notice__update_nag_notice() { ?>
+	<div class="update-nag notice is-dismissible">
+		<h4>Per iniziare ad usare Tuno Plugin inserisci il purchase code nella pagina del plugin</h4>
+		<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu "Tuno Plugin" ed inserisci il codice.</p>
+	</div>
+<?php
+}
+add_action( 'admin_notices', 'sample_admin_notice__update_nag_notice' );
 
-function purchase_code_render(  ) { 
+function purchase_code_render(  ) {
 
 	$options = get_option( 'ritle_settings' );
 	?>
@@ -61,14 +69,14 @@ function purchase_code_render(  ) {
 }
 
 
-function ritle_settings_section_callback(  ) { 
+function ritle_settings_section_callback(  ) {
 
 	//echo __( 'This section description', 'ritle' );
 
 }
 
 
-function ritle_options_page(  ) { 
+function ritle_options_page(  ) {
 
 	?>
 	<form action='options.php' method='post'>
@@ -119,6 +127,8 @@ function calcCTR(){
 	}
 
 	echo '
+
+
 	<div class="row">
 		<h2> Titolo Alternativo </h2>
 		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
