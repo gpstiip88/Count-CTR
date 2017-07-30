@@ -9,6 +9,14 @@ Author URI: http://www.stiip.it
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+// check for updates
+require 'plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://github.com/gpstiip88/Count-CTR',
+	__FILE__,
+	'Count-CTR'
+);
+
 /** CSS Style Ritle pluin page  */
 function admin_register_head() {
     $siteurl = get_option('siteurl');
