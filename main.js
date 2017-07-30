@@ -24,12 +24,23 @@
 		});
 	}
 
+	// calculate title ctr
 	$(document).on('change keyup', '#title', function(e){
 		getTitlePoints($(this).val(), 'original-title', true);
 	});
 
-	$(document).on('change keyup', '#subtitle', function(e){
+	// calculate alternative title ctr
+	$(document).on('change keyup', '#alternative-title', function(e){
 		getTitlePoints($(this).val(), 'alternative-title', true);
+	});
+
+	// substitute title with alternative title
+	$(document).on('click', '#use-alternative-title', function(e){
+		if($('#alternative-title').val() != ''){
+			$('#title').val($('#alternative-title').val());
+			$('#alternative-title').val('');
+			$('#alternative-title, #title').trigger('change');
+		}
 	});
 
 })(jQuery);

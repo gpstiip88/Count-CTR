@@ -127,12 +127,10 @@ function calcCTR(){
 	}
 
 	echo '
-
-
 	<div class="row">
 		<h2> Titolo Alternativo </h2>
-		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="subtitle" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
-		<input type="submit" name="submit" id="submit" class="button button-primary" value="Usa titolo alternativo">
+		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="alternative-title" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
+		<input type="button" id="use-alternative-title" class="button button-primary" value="Usa titolo alternativo">
 	</div>
 <div class="text row">
 
