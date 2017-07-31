@@ -131,15 +131,7 @@ function calcCTR(){
 	wp_enqueue_script( 'ctrCountPluginJS' );
 
 	$title = html_entity_decode( get_the_title(), ENT_QUOTES, 'UTF-8' );
-	/*if( $title != ''){
-
-		$response = json_decode( wp_remote_retrieve_body(wp_remote_post($plugin_data['api_url'], array(
-				    'body'      => ['title' => $title, 'purchaseCode' => $purchase_code],
-				))) );
-		$points = $response->points;
-	} else {
-		$points = 0;
-	}*/
+	
 	$points = 0;
 
 	echo '
