@@ -50,7 +50,15 @@ function ritle_settings_init(  ) {
 
 }
 
-function sample_admin_notice__update_nag_notice() { ?>
+function sample_admin_notice__update_nag_notice() { 
+	$options = get_option( 'ritle_settings' );
+	$purchase_code = $options['purchase_code'];
+
+	if( $purchase_code ){
+		return;
+	}
+	?>
+	<div class="clear"></div>
 	<div class="update-nag notice is-dismissible">
 		<h4>Per iniziare ad usare Tuno Plugin inserisci il purchase code nella pagina del plugin</h4>
 		<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu "Tuno Plugin" ed inserisci il codice.</p>
@@ -99,7 +107,6 @@ function calcCTR(){
 	$purchase_code = $options['purchase_code'];
 
 	if( ! $purchase_code ){
-		echo 'Per favore Inserisci il tuo purchase code';
 		return;
 	}
 
@@ -116,7 +123,7 @@ function calcCTR(){
 	wp_enqueue_script( 'ctrCountPluginJS' );
 
 	$title = html_entity_decode( get_the_title(), ENT_QUOTES, 'UTF-8' );
-	if( $title != ''){
+	/*if( $title != ''){
 
 		$response = json_decode( wp_remote_retrieve_body(wp_remote_post($plugin_data['api_url'], array(
 				    'body'      => ['title' => $title, 'purchaseCode' => $purchase_code],
@@ -124,10 +131,15 @@ function calcCTR(){
 		$points = $response->points;
 	} else {
 		$points = 0;
-	}
+	}*/
+	$points = 0;
 
 	echo '
-
+	<div class="text row">
+		<div style="display:none;" id="ritle-message">
+			
+		</div>
+	</div>
 
 	<div class="row">
 		<h2> Titolo Alternativo </h2>
@@ -148,11 +160,11 @@ function calcCTR(){
 		</div>
 
 		<div class="tips">';
-		foreach ($response->tips as $tip => $text) {
+		/*foreach ($response->tips as $tip => $text) {
 			echo '<div class="cornice">
 				<p><span class="text-font">Suggerimento: </span>'.$text.'</p>
 			</div>';
-		}
+		}*/
 
 		echo '
 		</div>

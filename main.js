@@ -9,7 +9,20 @@
 				title: title,
 				purchaseCode: ritle.purchase_code
 			},
-			success: function(response){
+			statusCode: {
+			      200: function (response) {
+			         alert('1');
+			      },
+			      201: function (response) {
+			         alert('1');
+			      },
+			      400: function (response) {
+			         $('#ritle-message').css('display', 'block').html(JSON.parse(response.responseText).message);
+			      },
+			      404: function (response) {
+			         alert('1');
+			      }
+			}, success: function(response){
 				var points = response.points;
 				$('#'+titleClass+' .c100').removeClass().addClass('c100 p'+points);
 				$('#'+titleClass+' .points').html(points);
@@ -30,6 +43,10 @@
 
 	$(document).on('change keyup', '#subtitle', function(e){
 		getTitlePoints($(this).val(), 'alternative-title', true);
+	});
+
+	$(document).ready(function(){
+		getTitlePoints($('#title').val(), 'original-title', true);
 	});
 
 })(jQuery);
