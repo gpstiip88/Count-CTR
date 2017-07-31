@@ -67,10 +67,10 @@ function sample_admin_notice__update_nag_notice() {
 	}
 	?>
 	<div class="clear"></div>
-	<div class="update-nag notice error is-dismissible">
-		<h4>Per iniziare ad usare Tuno Plugin inserisci il purchase code nella pagina del plugin</h4>
-		<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu &quot;Tuno Plugin&quot; ed inserisci il codice.</p>
-	</div>
+		<div class="update-nag notice error is-dismissible">
+			<h4>Per iniziare ad usare Tuno Plugin inserisci il purchase code nella pagina del plugin</h4>
+			<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu &quot;Tuno Plugin&quot; ed inserisci il codice.</p>
+		</div>
 <?php
 }
 add_action( 'admin_notices', 'sample_admin_notice__update_nag_notice' );
@@ -103,17 +103,20 @@ function ritle_options_page(  ) {
 		<h1>Ritle <small><sup>1.0</sup></small></h1>
 
 		<div class="ritle-admin">
-		<img style="max-width: 130px; margin-right: 10px;" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/ritle-logo-original.png">
-			<p> Ottimizza i Titoli del Tuo Blog, per migliorare il numero di click sul tuo sito. Clicca il pulsante per leggere la guida </p>
 
-			<a class="button button-primary button-ritle" href="#"> Leggi la Guida </a>
+			<img style="max-width: 130px; margin-right: 10px;" src="<?php echo plugin_dir_url( __FILE__ ); ?>img/ritle-logo-original.png">
+
+				<p>Ottimizza i Titoli del Tuo Blog, per migliorare il numero di click sul tuo sito. Clicca il pulsante per leggere la guida </p>
+
+				<a class="button button-primary button-ritle" href="#"> Leggi la Guida</a>
 		</div>
 
 		<div class="ritle-admin">
 
-			<p> Dai un'occhiata alle migliori Power Words selezionate dal team di Ritle </p>
+			<p>Dai un'occhiata alle migliori Power Words selezionate dal team di Ritle </p>
 
 			<a class="button button-primary button-ritle" href="#"> Scopri le Power Words </a>
+
 		</div>
 
 		<?php
@@ -160,12 +163,12 @@ function calcCTR(){
 	$points = 0;
 
 	echo '
-	<div ritle-admin  class="ritle-page">
-		<div class="row" id="ritle-message">
-		<img style="max-height: 58px; margin-right: 10px;" src="';
+		<div ritle-admin  class="ritle-page">
+			<div class="row" id="ritle-message">
+				<img style="max-height: 58px; margin-right: 10px;" src="';
 	echo plugin_dir_url( __FILE__ );
 
-		echo 'img/ritle-logo-original.png">
+	echo 'img/ritle-logo-original.png">
 			<p><span style="font-size: 18px; font-style: italic;">Importante: </span><span style="text-decoration: underline;">Non hai ancora acquistato il Purchase Code.</span>
 			<a class="button button-primary button-ritle" href="#">Acquistalo adesso ad un prezzo scontato!</a></p>
 		</div>
@@ -176,7 +179,7 @@ function calcCTR(){
 		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="alternative-title" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
 		<input style="margin-top: 10px; right: 0px; margin-left: auto;" type="button" id="use-alternative-title" class="button button-primary" value="Usa titolo alternativo">
 	</div>
-<div class="text row">
+	<div class="text row">
 
 	<div class="col-left-1" id="original-title">
 		<h2>CTR Titolo</h2>
