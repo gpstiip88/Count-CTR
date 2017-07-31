@@ -10,17 +10,8 @@
 				purchaseCode: ritle.purchase_code
 			},
 			statusCode: {
-			      200: function (response) {
-			         alert('1');
-			      },
-			      201: function (response) {
-			         alert('1');
-			      },
 			      400: function (response) {
 			         $('#ritle-message').css('display', 'block').html(JSON.parse(response.responseText).message);
-			      },
-			      404: function (response) {
-			         alert('1');
 			      }
 			}, success: function(response){
 				var points = response.points;
@@ -37,16 +28,27 @@
 		});
 	}
 
+	// calculate title ctr
 	$(document).on('change keyup', '#title', function(e){
 		getTitlePoints($(this).val(), 'original-title', true);
 	});
 
-	$(document).on('change keyup', '#subtitle', function(e){
+	// calculate alternative title ctr
+	$(document).on('change keyup', '#alternative-title', function(e){
 		getTitlePoints($(this).val(), 'alternative-title', true);
 	});
 
 	$(document).ready(function(){
 		getTitlePoints($('#title').val(), 'original-title', true);
+	});
+
+	// substitute title with alternative title
+	$(document).on('click', '#use-alternative-title', function(e){
+		if($('#alternative-title').val() != ''){
+			$('#title').val($('#alternative-title').val());
+			$('#alternative-title').val('');
+			$('#alternative-title, #title').trigger('change');
+		}
 	});
 
 })(jQuery);
