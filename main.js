@@ -16,7 +16,7 @@
 			}, success: function(response){
 				var points = response.points;
 				$('#'+titleClass+' .c100').removeClass().addClass('c100 p'+points);
-				$('#'+titleClass+' .points').html(points);
+				$('#'+titleClass+' .points').html(points+'%');
 
 				if(setTips){
 					$('#'+titleClass+' .tips').html('');

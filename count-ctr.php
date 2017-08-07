@@ -65,13 +65,15 @@ function sample_admin_notice__update_nag_notice() {
 	if( $purchase_code ){
 		return;
 	}
-	?>
-	<div class="clear"></div>
-		<div class="update-nag notice error is-dismissible">
-			<h4>Per iniziare ad usare Tuno Plugin inserisci il purchase code nella pagina del plugin</h4>
-			<p>Durante la fase di acquisto ti abbiamo inviato una mail con il purchase code. Recati sul menu &quot;Tuno Plugin&quot; ed inserisci il codice.</p>
+	echo '
+		<div class="ritle-admin ritle-page">
+			<div class="row">
+				<img style="max-height: 58px; margin-right: 10px;" src="'. plugin_dir_url( __FILE__ ).'img/ritle-logo-original.png">
+			<p><span style="font-size: 18px; font-style: italic;">Importante: </span><span style="text-decoration: underline;">Non hai ancora acquistato il Purchase Code.</span>
+			<a class="button button-primary button-ritle" href="#">Acquistalo adesso ad un prezzo scontato!</a></p>
 		</div>
-<?php
+	</div>';
+	
 }
 add_action( 'admin_notices', 'sample_admin_notice__update_nag_notice' );
 
@@ -155,17 +157,10 @@ function calcCTR(){
 	$points = 0;
 
 	echo '
-		<div ritle-admin  class="ritle-page">
-			<div class="row" id="ritle-message">
-				<img style="max-height: 58px; margin-right: 10px;" src="';
-	echo plugin_dir_url( __FILE__ );
-
-	echo 'img/ritle-logo-original.png">
-			<p><span style="font-size: 18px; font-style: italic;">Importante: </span><span style="text-decoration: underline;">Non hai ancora acquistato il Purchase Code.</span>
-			<a class="button button-primary button-ritle" href="#">Acquistalo adesso ad un prezzo scontato!</a></p>
-		</div>
+	<div class="clear"></div>
+	<div class="update-nag notice error is-dismissible" style="display: none;" id="ritle-message">
+		
 	</div>
-
 	<div class="row">
 		<h2> Titolo Alternativo </h2>
 		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="alternative-title" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
