@@ -70,10 +70,10 @@ function sample_admin_notice__update_nag_notice() {
 			<div class="row">
 				<img style="max-height: 58px; margin-right: 10px;" src="'. plugin_dir_url( __FILE__ ).'img/ritle-logo-original.png">
 			<p><span style="font-size: 18px; font-style: italic;">Importante: </span><span style="text-decoration: underline;">Non hai ancora acquistato il Purchase Code.</span>
-			<a class="button button-primary button-ritle" href="#">Acquistalo adesso ad un prezzo scontato!</a></p>
+			<a class="button button-primary button-ritle" href="http://ritle.stiip.it/">Acquistalo adesso ad un prezzo scontato!</a></p>
 		</div>
 	</div>';
-	
+
 }
 add_action( 'admin_notices', 'sample_admin_notice__update_nag_notice' );
 
@@ -117,7 +117,7 @@ function ritle_options_page(  ) {
 
 			<p>Dai un'occhiata alle migliori Power Words selezionate dal team di Ritle </p>
 
-			<a class="button button-primary button-ritle" href="#"> Scopri le Power Words </a>
+			<a class="button button-primary button-ritle" href="http://ritle.stiip.it/power-words/"> Scopri le Power Words </a>
 
 		</div>
 
@@ -153,13 +153,13 @@ function calcCTR(){
 	wp_enqueue_script( 'ctrCountPluginJS' );
 
 	$title = html_entity_decode( get_the_title(), ENT_QUOTES, 'UTF-8' );
-	
+
 	$points = 0;
 
 	echo '
 	<div class="clear"></div>
 	<div class="update-nag notice error is-dismissible" style="display: none;" id="ritle-message">
-		
+
 	</div>
 	<div class="row">
 		<h2> Titolo Alternativo </h2>
@@ -167,6 +167,7 @@ function calcCTR(){
 		<input style="margin-top: 10px; right: 0px; margin-left: auto;" type="button" id="use-alternative-title" class="button button-primary" value="Usa titolo alternativo">
 	</div>
 	<div class="text row">
+
 
 	<div class="col-left-1" id="original-title">
 		<h2>CTR Titolo</h2>

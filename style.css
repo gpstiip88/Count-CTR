@@ -251,10 +251,20 @@
   width: 1em;
   height: 1em;
   border-radius: 50%;
-
+  margin-left: auto !important;
+  margin-right: auto !important;
   margin: 0 0.1em 0.1em 0;
   background-color: #cccccc;
 }
+
+.col-left-1 h2 {
+text-align: center !important;
+}
+
+.col-left-2 h2 {
+text-align: center !important;
+}
+
 .c100 *,
 .c100 *:before,
 .c100 *:after {
@@ -1099,12 +1109,13 @@
 
 .col-left-1 {
 	float: left;
-	width: 50%;
+	width: 48%;
+  padding-right: 13px;
 }
 
 .col-left-2 {
 	float: left;
-	width: 50%;
+	width: 48%;
 }
 
 .col-right {
