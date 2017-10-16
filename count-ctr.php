@@ -117,7 +117,7 @@ function ritle_options_page(  ) {
 
 			<p>Dai un'occhiata alle migliori Power Words selezionate dal team di Ritle </p>
 
-			<a class="button button-primary button-ritle" href="http://ritle.stiip.it/power-words/"> Scopri le Power Words </a>
+			<a class="button button-primary button-ritle" href="http://ritle.stiip.it/power-words/" target="_blank"> Scopri le Power Words </a>
 
 		</div>
 
@@ -162,7 +162,7 @@ function calcCTR(){
 
 	</div>
 	<div class="row">
-		<h2> Titolo Alternativo </h2>
+		<h2>Titolo Alternativo</h2>
 		<input style="width: 100%;" type="text" name="post_subtitle" value="" id="alternative-title" spellcheck="true" autocomplete="off" placeholder="Confronta un titolo alternativo in tempo reale.">
 		<input style="margin-top: 10px; right: 0px; margin-left: auto;" type="button" id="use-alternative-title" class="button button-primary" value="Usa titolo alternativo">
 	</div>
@@ -210,4 +210,39 @@ function calcCTR(){
 
 }
 
-add_action('edit_form_after_title', 'calcCTR');
+//add_action('edit_form_after_title', 'calcCTR');
+
+function ritle_add_meta_box() {
+	add_meta_box(
+		'ritle-ritle',
+		__( 'Ritle', 'ritle' ),
+		'calcCTR',
+		'post',
+		'advanced',
+		'high'
+	);
+	add_meta_box(
+		'ritle-ritle',
+		__( 'Ritle', 'ritle' ),
+		'calcCTR',
+		'page',
+		'advanced',
+		'high'
+	);
+	add_meta_box(
+		'ritle-ritle',
+		__( 'Ritle', 'ritle' ),
+		'calcCTR',
+		'attachment',
+		'advanced',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'ritle_add_meta_box' );
+
+// Move all "advanced" metaboxes above the default editor
+add_action('edit_form_after_title', function() {
+    global $post, $wp_meta_boxes;
+    do_meta_boxes(get_current_screen(), 'advanced', $post);
+    unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+});
