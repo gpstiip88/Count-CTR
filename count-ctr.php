@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: Count CTR Plugin
+Plugin Name: Ritle
 Version: 1.0
-Description: Counter for CTR of post's title
-Author: Gabriele Pieretti
-Author URI: http://www.stiip.it
+Description: Ottimizza i titoli dei tuoi posts!
+Author: Gabriele Pieretti - Andrea Tasselli
+Author URI: https://andreatasselli.net/
 */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
@@ -31,7 +31,8 @@ add_action( 'admin_init', 'ritle_settings_init' );
 
 function ritle_add_admin_menu(  ) {
 
-	add_menu_page( 'Ritle', 'Ritle', 'manage_options', 'ritle', 'ritle_options_page', 'dashicons-palmtree' );
+	add_menu_page( 'Ritle', 'Ritle', 'manage_options', 'ritle', 'ritle_options_page', '
+dashicons-chart-area' );
 
 }
 
@@ -69,8 +70,8 @@ function sample_admin_notice__update_nag_notice() {
 		<div class="ritle-admin ritle-page">
 			<div class="row">
 				<img style="max-height: 58px; margin-right: 10px;" src="'. plugin_dir_url( __FILE__ ).'img/ritle-logo-original.png">
-			<p><span style="font-size: 18px; font-style: italic;">Importante: </span><span style="text-decoration: underline;">Non hai ancora acquistato il Purchase Code.</span>
-			<a class="button button-primary button-ritle" href="http://ritle.stiip.it/">Acquistalo adesso ad un prezzo scontato!</a></p>
+			<p><span style="font-size: 18px; font-style: italic;">Importante: </span><span style="text-decoration: underline;">Non hai ancora inserito il Purchase Code.</span>
+			<a class="button button-primary button-ritle" href="'. get_site_url() .'/wp-admin/admin.php?page=ritle">Inseriscilo qui!</a></p>
 		</div>
 	</div>';
 
@@ -110,14 +111,14 @@ function ritle_options_page(  ) {
 
 				<p>Ottimizza i Titoli del Tuo Blog, per migliorare il numero di click sul tuo sito. Clicca il pulsante per leggere la guida </p>
 
-				<a class="button button-primary button-ritle" href="#"> Leggi la Guida</a>
+				<a class="button button-primary button-ritle" href="https://ritle.it/guida/" target="_blank"> Leggi la Guida</a>
 		</div>
 
 		<div class="ritle-admin">
 
 			<p>Dai un'occhiata alle migliori Power Words selezionate dal team di Ritle </p>
 
-			<a class="button button-primary button-ritle" href="http://ritle.stiip.it/power-words/" target="_blank"> Scopri le Power Words </a>
+			<a class="button button-primary button-ritle" href="https://ritle.it/power-words/" target="_blank"> Scopri le Power Words </a>
 
 		</div>
 
