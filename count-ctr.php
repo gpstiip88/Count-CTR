@@ -146,7 +146,7 @@ function calcCTR(){
 
 	$plugin_data = array(
 		'purchase_code' => $purchase_code,
-		'api_url' => 'http://ritle.andreatasselli.net/calc-ctr.php'
+		'api_url' => 'http://api.ritle.it/check-neworders.php'
 	);
 	wp_localize_script( 'ctrCountPluginJS', 'ritle', $plugin_data );
 
